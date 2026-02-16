@@ -6,36 +6,21 @@ The [International Statistical Institute (ISI)](https://isi-web.org/Global-ISI-E
 
 To support the development of this programme, the ISI invites the statistical community to submit proposals for the IPS. These proposals are then reviewed by the Scientific Programme Committee (SPC), and the highest-rated papers are selected for presentation at the World Statistics Congress.
 
-Given the large number of proposals submitted, this code supports the matching of IPS proposals to SPC reviewers by ensuring that each paper is assigned to at least two reviewers with the highest possible topical and methodological alignment. The Python workflow uses text embeddings to compare proposals and reviewer profiles. Text embeddings are numerical representations of text that capture meaning and context, allowing the code to measure semantic similarity beyond simple keyword matching. In practice, this means the system identifies reviewers whose expertise is conceptually aligned with a proposal even when different terminology is used. The output is an assignment sheet listing all papers and their corresponding most qualified reviewers.
+### What This Code Does
+Given the large number of proposals submitted, this code supports the matching of IPS proposals to SPC reviewers by ensuring that each paper is assigned to at least two reviewers with the highest possible topical and methodological alignment. 
 
+The Python workflow uses text embeddings to compare proposals and reviewer profiles. Text embeddings are numerical representations of text that capture meaning and context, allowing the code to measure semantic similarity beyond simple keyword matching. In practice, this means the system identifies reviewers whose expertise is conceptually aligned with a proposal even when different terminology is used. 
 
-## Table of Contents // review this
+The output is an assignment sheet listing all papers and their corresponding most qualified reviewers.
 
-- [Overview](#overview)
+## Table of Contents
+
 - [System Workflow](#system-workflow)
 - [Directory Structure](#directory-structure)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Data Preparation Methodology](#data-preparation-methodology)
-- [Usage](#usage)
-  - [Step 1: Generate Proposal Embeddings](#step-1-generate-proposal-embeddings)
-  - [Step 2: Generate Member Embeddings](#step-2-generate-member-embeddings)
-  - [Step 3: Assign Reviewers](#step-3-assign-reviewers)
-- [Assignment Algorithm](#assignment-algorithm)
-- [Input File Formats](#input-file-formats)
-- [Output](#output)
-- [Troubleshooting](#troubleshooting)
-- [License](#license)
+- [Getting Started](#getting-started)
+  - [Step 1: Gather Inputs](#gather-inputs)
+  - [Step 2: Run Embedding Code]
 
-## Overview
-
-This system assigns reviewers to proposals following these key principles:
-
-1. **Complete Association Coverage**: ALL reviewers from a specific association review ALL papers from that association
-2. **Dual Review Requirement**: Every proposal receives exactly 2 reviewers
-3. **Fair Workload Distribution**: Reviews are distributed as equitably as possible across all reviewers
-4. **Similarity-Based Matching**: Uses embedding vectors to match proposals with reviewers based on expertise
 
 ## System Workflow
 
@@ -68,6 +53,72 @@ isi-proposal-assignment/
 ├── .env.example                   # Configuration template
 └── README.md                      # This file
 ```
+
+## Getting Started
+
+### Gather Inputs
+
+#### The Committee Members (members.csv)
+
+On the Scientific Programme Committee website for the World Statistics Congress, you can find online the list of committee members who are the potential reviewers. From this site, gather the **name** and **association** from each member.
+
+For instance, for the 66th ISI World Statistics Congress in 2027, the names and associations of committee members are published here: [https://www.isi-next.org/conferences/isi-wsc2027/scientific-programme-committee/#0](https://www.isi-next.org/conferences/isi-wsc2027/scientific-programme-committee/#0).
+
+Note that within the ISI, there are [seven specialized associations](https://isi-web.org/our-associations-and-committees), which help organize the different topic areas:
+- International Association of Survey Statisticians (IASS)
+- Bernoulli Society for Mathematical Statistics and Probability (BS)
+- International Association for Statistical Computing (IASC)
+- International Association for Official Statistics (IAOS)
+- International Association for Statistical Education (IASE)
+- International Society for Business and Industrial Statistics (ISBIS)
+- The International Environmetrics Society (TIES)
+
+If the SPC member isn't assigned to a specific association, then mark their association as "Other" in the csv file.
+
+Finally, collect the **expertise** of each member by doing an online search of their names, utilizing relevant information found at personal/institutional webpages with biographical descriptions, professional profiles (ResearchGate, LinkedIn, university pages), or publication titles and abstracts. Extract relevant keywords from these sources and use consistent formatting between members.
+
+**Example members.csv entry:**
+```csv
+Member, Association, Expertise
+Sebastian Engelke,	BS,	Extreme value theory and graphical models. Extrapolation in machine learning. Weather forecasting with AI artificial intelligence. Statistical climate science. Extremes of structural causal models. Levy graphical models. Graphical models for multivariate extremes. Learning extremal graphical structures in high dimensions. Synergy effect between convolutional neural networks and the multiplicity of SMILES for improvement of molecular prediction. Numerical models outperform AI weather forecasts of record-breaking extremes.
+```
+
+#### The Proposals (proposals.csv)
+
+Questions: which is used - proposals or descriptions? where does this come from?
+
+
+---------------------------------------------------------------------
+
+## Table of Contents // review this
+
+- [Overview](#overview)
+- [System Workflow](#system-workflow)
+- [Directory Structure](#directory-structure)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Data Preparation Methodology](#data-preparation-methodology)
+- [Usage](#usage)
+  - [Step 1: Generate Proposal Embeddings](#step-1-generate-proposal-embeddings)
+  - [Step 2: Generate Member Embeddings](#step-2-generate-member-embeddings)
+  - [Step 3: Assign Reviewers](#step-3-assign-reviewers)
+- [Assignment Algorithm](#assignment-algorithm)
+- [Input File Formats](#input-file-formats)
+- [Output](#output)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
+## Overview
+
+This system assigns reviewers to proposals following these key principles:
+
+1. **Complete Association Coverage**: ALL reviewers from a specific association review ALL papers from that association
+2. **Dual Review Requirement**: Every proposal receives exactly 2 reviewers
+3. **Fair Workload Distribution**: Reviews are distributed as equitably as possible across all reviewers
+4. **Similarity-Based Matching**: Uses embedding vectors to match proposals with reviewers based on expertise
+
+
 
 ## Prerequisites
 
