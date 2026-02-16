@@ -1,8 +1,15 @@
-# IPS Reviewer Assignment System
+# ISI Proposal Assignment System
 
-A Python-based system that intelligently assigns reviewers to IPS (Invited Paper Session) proposals using embedding-based similarity scoring and association-based rules.
+*Intelligent assignment of ISI World Statistics Congress proposals to Scientific Programme Committee reviewers*
 
-## Table of Contents
+The [International Statistical Institute (ISI)](https://isi-web.org/Global-ISI-Events) is a non-governmental organization dedicated to creating a better world through statistics and data science. Every two years, the ISI organizes the World Statistics Congress, a leading global forum for the exchange of statistical knowledge and methodological developments. Within the Congress, the Invited Paper Sessions (IPS) showcase innovative and highly relevant academic contributions.
+
+To support the development of this programme, the ISI invites the statistical community to submit proposals for the IPS. These proposals are then reviewed by the Scientific Programme Committee (SPC), and the highest-rated papers are selected for presentation at the World Statistics Congress.
+
+Given the large number of proposals submitted, this code supports the matching of IPS proposals to SPC reviewers by ensuring that each paper is assigned to at least two reviewers with the highest possible topical and methodological alignment. The Python workflow uses text embeddings to compare proposals and reviewer profiles. Text embeddings are numerical representations of text that capture meaning and context, allowing the code to measure semantic similarity beyond simple keyword matching. In practice, this means the system identifies reviewers whose expertise is conceptually aligned with a proposal even when different terminology is used. The output is an assignment sheet listing all papers and their corresponding most qualified reviewers.
+
+
+## Table of Contents // review this
 
 - [Overview](#overview)
 - [System Workflow](#system-workflow)
